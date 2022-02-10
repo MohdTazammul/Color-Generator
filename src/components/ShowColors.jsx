@@ -24,10 +24,7 @@ export const ShowColors = ()=> {
   }
 
   useEffect(()=>{
-
-    // setFrequency(frequency);
     handleSubmit();
-    
   }, [frequency])
 
   return (
@@ -35,13 +32,18 @@ export const ShowColors = ()=> {
       <div className='container'>
         <img src={logo} width="200px" />
         <input type='number' value={frequency} onChange={(e) => {
-          freq(+e.target.value)
+          if(e.target.value > 100)
+            setFrequency(100);
+          if(e.target.value < 1)
+            setFrequency(1);
+          else
+            freq(+e.target.value)
           }} className="frequency" />
         <form onSubmit={(e)=>{
           e.preventDefault()
           handleSubmit()
         }}>
-          <input type='text' value={color} onChange={(e) => {setColor(e.target.value)}} placeholder='#94002c' className={`${error ? 'error' : null}`} />
+          <input type='text' value={color} onChange={(e) => {setColor(e.target.value)}}  className={`${error ? 'error' : null}`} />
           <button className='btn' type='submit'> submit </button>
         </form>
       </div>
